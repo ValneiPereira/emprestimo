@@ -31,7 +31,7 @@
 				<p:tab title="Dados Pessoas" id="tabDadoPessoas">
 					<p:panelGrid columns="2" id="painel" style="width: 100%; margin-top: 20px;" columnClasses="rotulo, campo">
 						<p:outputLabel value="Código cliente:" for="codigo" />
-						<p:outputLabel id="codigo" size="20" maxlength="20" value="#{cadastroClienteMB.cliente.codCliente}" readonly="true" />
+						<p:outputLabel  id="codigo" size="20" maxlength="20" value="#{cadastroClienteMB.cliente.codCliente}" readonly="true" />
 
 						<p:outputLabel value="Nome cliente:" for="nome" />
 						<p:inputText id="nome" size="20" maxlength="50" value="#{cadastroClienteMB.cliente.nome}" />
@@ -55,10 +55,14 @@
 						</p:selectOneMenu>
 						
 						<p:outputLabel value="Total do Patrimonio:" for="totalPatrimonio"   />
-						<p:inputText id="totalPatrimonio" size="20" maxlength="10" value="#{cadastroClienteMB.cliente.totalPatrimonio}" />
+						<p:inputText id="totalPatrimonio" size="20" maxlength="10" value="#{cadastroClienteMB.cliente.totalPatrimonio}" >
+							<p:ajax update="totalPatrimonio" />
+						</p:inputText>
 						
 						<p:outputLabel value="Rendimento mensal:" for="rendimentoMensal" />
-						<p:inputText id="rendimentoMensal" size="20" maxlength="10" value="#{cadastroClienteMB.cliente.rendimentoMensal}" />
+						<p:inputNumber id="rendimentoMensal" size="20" maxlength="10" value="#{cadastroClienteMB.cliente.rendimentoMensal}" >
+							<p:ajax update="rendimentoMensal" />
+						</p:inputNumber>
 
 						<p:outputLabel value="Riscos:" for="riscos" />
 						<p:inputText id="riscos" size="20" maxlength="10" value="#{cadastroClienteMB.cliente.riscos}" readonly="true" style="text-align: center" />
@@ -69,8 +73,7 @@
 					<p:spacer height="30"></p:spacer>
 
 					<p:dataTable id="enderecosTable" var="endereco" value="#{cadastroClienteMB.cliente.enderecos}" 
-						style="margin-top:20px" emptyMessage="Nenhum endereco encontrado." rows="20" paginator="true" 
-						paginatorAlwaysVisible="false" paginatorPosition="bottom">
+						style="margin-top:20px" emptyMessage="Nenhum endereco encontrado." rows="20" paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom">
 						<p:column headerText="Código Endereço" style="text-align: center; width: 100px">
 							<h:outputText value="#{endereco.codEndereco}" />
 						</p:column>
@@ -100,48 +103,30 @@
 						</p:column>
 						
 						<p:column style="width: 100px; text-align: center">
-							<p:button  icon="ui-icon-pencil" title="Editar" oncomplete="editarEnderedo.show()">
-						
+							<p:button  icon="ui-icon-pencil" title="Editar" oncomplete="PF('editarEnderedo').show()" process="@this" update=":frmCadastro:formEditarEndereco">
+								
+								
 							</p:button>
+						</p:column>
 						
-						</p:column>						
 						
 					</p:dataTable>
-						<p:dialog header="Editar e add Endereco:" widgetVar="editarEndereco" resizable="false" >
-						coneudo
-						
-						</p:dialog>
 					
-					
-					
-					
+					<p:dialog header="Editar e add Endereco:" widgetVar="editarEndereco"  modal="true"	appendTo="@(body)" resizable="false">
+						<h:form id="formEditarEndereco" styleClass="modal-body">
+							<f:validateBean>
+								<div class="div5"></div>
+								<p:spacer height="20" />
 
+								<p:commandButton value="Ok" process="@this,@form" />
+								<p:commandButton value="Cancelar" oncomplete=" PF('editarEnderedo').hide();" />
+								<p:separator />
+								
+							</f:validateBean>
+						</h:form>
+					</p:dialog>
 					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-
-					</p:tab>
-					
+				</p:tab>
 				</p:tabView>
 			</h:form>
 		</ui:define>

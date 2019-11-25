@@ -15,7 +15,8 @@
     		    		
     		<p:toolbar style="margin-top: 20px">
     			<p:toolbarGroup>
-    				<p:commandButton value="Novo" id="botaoNovo" action="/cliente/cadastro-cliente.xhtml"/>
+    				<p:commandButton value="Novo" id="botaoNovo" action="cadastro-cliente?faces-redirect=true"/>
+    				
 				</p:toolbarGroup>
 			</p:toolbar>
 			
@@ -33,17 +34,17 @@
 					<p:button outcome="cadastro-cliente" icon="ui-icon-pencil" title="Editar">
 						<f:param name="cliente" value="#{cliente.codCliente}"/>
 					</p:button>
-					<p:commandButton icon="ui-icon-trash" title="Excluir" oncomplete="confirmacaoExclusao.show()"
-					process="@this" update=":frmPesquisa:confirmacaoExclusaoDialog">
+					<p:commandButton icon="ui-icon-trash" title="Excluir" oncomplete="PF('confirmacaoExclusao').show()"
+					process="@this" update=":frmPesquisa:confirmacaoExclusao">
 						<f:setPropertyActionListener target="#{pesquisaClienteMB.clienteSelecionado}" value="#{cliente}" />
 					</p:commandButton>
 				</p:column>
 
 			</p:dataTable>
-		    <p:confirmDialog id="confirmacaoExclusaoDialog" widgetVar="confirmacaoExclusao"
+		    <p:confirmDialog id="confirmacaoExclusao" widgetVar="confirmacaoExclusao"
 				message="Tem certeza que deseja excluir o cliente #{pesquisaClienteMB.clienteSelecionado.nome}?"  
 				header="Exclusão de Cliente" severity="alert">
-	        	<p:button value="Não" onclick="confirmacaoExclusao.hide(); return false;" />
+	        	<p:button value="Não" onclick="PF('confirmacaoExclusao').hide(); return false;" />
 	        	<p:commandButton value="Sim" update=":frmPesquisa:clientesTable"
 					onclick="confirmacaoExclusao.hide()" action="#{pesquisaClienteMB.excluir}" />
 			</p:confirmDialog>
