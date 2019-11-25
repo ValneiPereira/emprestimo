@@ -1,0 +1,148 @@
+<ui:composition template="/WEB-INF/template/layout-padrao.xhtml" 
+	xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:h="http://java.sun.com/jsf/html" 
+	xmlns:f="http://java.sun.com/jsf/core" 
+	xmlns:ui="http://java.sun.com/jsf/facelets" 
+	xmlns:p="http://primefaces.org/ui" 
+	xmlns:o="http://omnifaces.org/ui">
+
+	<ui:define name="titulo">Novo Cliente</ui:define>
+	
+
+	<ui:define name="corpo">
+		<f:metadata>
+			<o:viewParam name="cliente" value="#{cadastroClienteMB.cliente}" />
+		</f:metadata>
+
+		<h1>Novo Cliente</h1>
+
+		<h:form id="frmCadastro">
+			<p:messages id="messages" autoUpdate="true" closable="true" />
+			<p:toolbar style="margin-top: 20px">
+				<p:toolbarGroup>
+					<p:commandButton value="Salvar" id="botaoSalvar" action="#{cadastroClienteMB.salvar}" update="frmCadastro" />
+				</p:toolbarGroup>
+				<p:toolbarGroup align="right">
+					<p:button value="Pesquisa" outcome="/cliente/pesquisa-clientes.xhtml" />
+				</p:toolbarGroup>
+			</p:toolbar>
+
+			<p:tabView >
+				<p:tab title="Dados Pessoas" id="tabDadoPessoas">
+					<p:panelGrid columns="2" id="painel" style="width: 100%; margin-top: 20px;" columnClasses="rotulo, campo">
+						<p:outputLabel value="Código cliente:" for="codigo" />
+						<p:outputLabel id="codigo" size="20" maxlength="20" value="#{cadastroClienteMB.cliente.codCliente}" readonly="true" />
+
+						<p:outputLabel value="Nome cliente:" for="nome" />
+						<p:inputText id="nome" size="20" maxlength="50" value="#{cadastroClienteMB.cliente.nome}" />
+
+						<p:outputLabel value="CPF:" for="cpf" />
+						<p:inputText id="cpf" size="20" maxlength="10" value="#{cadastroClienteMB.cliente.cpf}" />
+
+						<p:outputLabel value="Sexo:" for="sexo" />
+						<p:selectOneMenu id="sexo" value="#{cadastroClienteMB.cliente.sexo}">
+							<f:selectItem itemLabel="Selecione o sexo" />
+							<f:selectItem itemLabel="Masculino" itemValue="M" />
+							<f:selectItem itemLabel="Feminino" itemValue="F" />
+						</p:selectOneMenu>
+
+						<p:outputLabel value="Tipo de cliente:" for="tipoCliente" />
+						<p:selectOneMenu id="tipoCliente" value="#{cadastroClienteMB.cliente.tipoCliente}" >
+							<f:selectItem itemLabel="Selecione o tipo de cliente" />
+							<f:selectItem itemLabel="Potencial" itemValue="P" />
+							<f:selectItem itemLabel="Comum" itemValue="C" />
+							<f:selectItem itemLabel="Especial" itemValue="E" />
+						</p:selectOneMenu>
+						
+						<p:outputLabel value="Total do Patrimonio:" for="totalPatrimonio"   />
+						<p:inputText id="totalPatrimonio" size="20" maxlength="10" value="#{cadastroClienteMB.cliente.totalPatrimonio}" />
+						
+						<p:outputLabel value="Rendimento mensal:" for="rendimentoMensal" />
+						<p:inputText id="rendimentoMensal" size="20" maxlength="10" value="#{cadastroClienteMB.cliente.rendimentoMensal}" />
+
+						<p:outputLabel value="Riscos:" for="riscos" />
+						<p:inputText id="riscos" size="20" maxlength="10" value="#{cadastroClienteMB.cliente.riscos}" readonly="true" style="text-align: center" />
+					</p:panelGrid>
+					
+								
+										
+					<p:spacer height="30"></p:spacer>
+
+					<p:dataTable id="enderecosTable" var="endereco" value="#{cadastroClienteMB.cliente.enderecos}" 
+						style="margin-top:20px" emptyMessage="Nenhum endereco encontrado." rows="20" paginator="true" 
+						paginatorAlwaysVisible="false" paginatorPosition="bottom">
+						<p:column headerText="Código Endereço" style="text-align: center; width: 100px">
+							<h:outputText value="#{endereco.codEndereco}" />
+						</p:column>
+
+						<p:column headerText="Nome da rua" style="text-align: center; width: 100px">
+							<h:outputText value="#{endereco.nomeRua}" />
+						</p:column>
+
+						<p:column headerText="CEP" style="text-align: center; width: 100px">
+							<h:outputText value="#{endereco.cep}" />
+						</p:column>
+
+						<p:column headerText="Número" style="text-align: center; width: 100px">
+							<h:outputText value="#{endereco.numero}" />
+						</p:column>
+
+						<p:column headerText="Bairro" style="text-align: center; width: 100px">
+							<h:outputText value="#{endereco.bairro}" />
+						</p:column>
+
+						<p:column headerText="Cidade" style="text-align: center; width: 100px">
+							<h:outputText value="#{endereco.cidade}" />
+						</p:column>
+
+						<p:column headerText="Estado" style="text-align: center; width: 100px">
+							<h:outputText value="#{endereco.estado}" />
+						</p:column>
+						
+						<p:column style="width: 100px; text-align: center">
+							<p:button  icon="ui-icon-pencil" title="Editar" oncomplete="editarEnderedo.show()">
+						
+							</p:button>
+						
+						</p:column>						
+						
+					</p:dataTable>
+						<p:dialog header="Editar e add Endereco:" widgetVar="editarEndereco" resizable="false" >
+						coneudo
+						
+						</p:dialog>
+					
+					
+					
+					
+
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+
+					</p:tab>
+					
+				</p:tabView>
+			</h:form>
+		</ui:define>
+	</ui:composition>

@@ -1,0 +1,52 @@
+<ui:composition template="/WEB-INF/template/layout-padrao.xhtml"
+				xmlns="http://www.w3.org/1999/xhtml"
+				xmlns:h="http://java.sun.com/jsf/html"
+				xmlns:f="http://java.sun.com/jsf/core"
+				xmlns:ui="http://java.sun.com/jsf/facelets"
+				xmlns:p="http://primefaces.org/ui">
+				
+    <ui:define name="titulo">Pesquisa de Clientes</ui:define>
+    
+    <ui:define name="corpo">
+    	<h1>Pesquisa de Clientes</h1>	
+    	
+    	<h:form id="frmPesquisa">		
+    		<p:messages id="messages" autoUpdate="true" closable="true" />
+    		    		
+    		<p:toolbar style="margin-top: 20px">
+    			<p:toolbarGroup>
+    				<p:commandButton value="Novo" id="botaoNovo" action="/cliente/cadastro-cliente.xhtml"/>
+				</p:toolbarGroup>
+			</p:toolbar>
+			
+	    	<p:dataTable id="clientesTable" value="#{pesquisaClienteMB.clientes}" var="cliente"
+			style="margin-top: 20px" emptyMessage="Nenhum cliente encontrado." rows="20"
+			paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom">
+				<p:column headerText="Código" style="text-align: center; width: 100px">
+					<h:outputText value="#{cliente.codCliente}"/>
+				</p:column>
+				<p:column headerText="Nome">
+					<h:outputText value="#{cliente.nome}" />
+				</p:column>
+				
+				<p:column style="width: 100px; text-align: center">
+					<p:button outcome="cadastro-cliente" icon="ui-icon-pencil" title="Editar">
+						<f:param name="cliente" value="#{cliente.codCliente}"/>
+					</p:button>
+					<p:commandButton icon="ui-icon-trash" title="Excluir" oncomplete="confirmacaoExclusao.show()"
+					process="@this" update=":frmPesquisa:confirmacaoExclusaoDialog">
+						<f:setPropertyActionListener target="#{pesquisaClienteMB.clienteSelecionado}" value="#{cliente}" />
+					</p:commandButton>
+				</p:column>
+
+			</p:dataTable>
+		    <p:confirmDialog id="confirmacaoExclusaoDialog" widgetVar="confirmacaoExclusao"
+				message="Tem certeza que deseja excluir o cliente #{pesquisaClienteMB.clienteSelecionado.nome}?"  
+				header="Exclusão de Cliente" severity="alert">
+	        	<p:button value="Não" onclick="confirmacaoExclusao.hide(); return false;" />
+	        	<p:commandButton value="Sim" update=":frmPesquisa:clientesTable"
+					onclick="confirmacaoExclusao.hide()" action="#{pesquisaClienteMB.excluir}" />
+			</p:confirmDialog>
+		</h:form>
+	</ui:define>
+</ui:composition>
