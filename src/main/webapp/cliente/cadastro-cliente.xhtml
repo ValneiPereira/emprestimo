@@ -7,11 +7,9 @@
 	xmlns:o="http://omnifaces.org/ui">
 
 	<ui:define name="titulo">Novo Cliente</ui:define>
-	
-
 	<ui:define name="corpo">
 		<f:metadata>
-			<o:viewParam name="cliente" value="#{cadastroClienteMB.cliente}" />
+			<o:viewParam name="cliente" value="#{cadastroClienteMB.cliente}"/>			
 		</f:metadata>
 
 		<h1>Novo Cliente</h1>
@@ -31,7 +29,7 @@
 				<p:tab title="Dados Pessoas" id="tabDadoPessoas">
 					<p:panelGrid columns="2" id="painel" style="width: 100%; margin-top: 20px;" columnClasses="rotulo, campo">
 						<p:outputLabel value="Código cliente:" for="codigo" />
-						<p:outputLabel  id="codigo" size="20" maxlength="20" value="#{cadastroClienteMB.cliente.codCliente}" readonly="true" />
+						<p:inputText  id="codigo" size="20" maxlength="20" value="#{cadastroClienteMB.cliente.codCliente}" readonly="true" />
 
 						<p:outputLabel value="Nome cliente:" for="nome" />
 						<p:inputText id="nome" size="20" maxlength="50" value="#{cadastroClienteMB.cliente.nome}" />
@@ -56,13 +54,13 @@
 						
 						<p:outputLabel value="Total do Patrimonio:" for="totalPatrimonio"   />
 						<p:inputText id="totalPatrimonio" size="20" maxlength="10" value="#{cadastroClienteMB.cliente.totalPatrimonio}" >
-							<p:ajax update="totalPatrimonio" />
+							
 						</p:inputText>
 						
 						<p:outputLabel value="Rendimento mensal:" for="rendimentoMensal" />
-						<p:inputNumber id="rendimentoMensal" size="20" maxlength="10" value="#{cadastroClienteMB.cliente.rendimentoMensal}" >
+						<p:inputText id="rendimentoMensal" size="20" maxlength="10" value="#{cadastroClienteMB.cliente.rendimentoMensal}" >
 							<p:ajax update="rendimentoMensal" />
-						</p:inputNumber>
+						</p:inputText>
 
 						<p:outputLabel value="Riscos:" for="riscos" />
 						<p:inputText id="riscos" size="20" maxlength="10" value="#{cadastroClienteMB.cliente.riscos}" readonly="true" style="text-align: center" />
@@ -104,8 +102,7 @@
 						
 						<p:column style="width: 100px; text-align: center">
 							<p:button  icon="ui-icon-pencil" title="Editar" oncomplete="PF('editarEnderedo').show()" process="@this" update=":frmCadastro:formEditarEndereco">
-								
-								
+														
 							</p:button>
 						</p:column>
 						

@@ -11,7 +11,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "endereco")
@@ -25,7 +24,7 @@ public class Endereco implements Serializable{
   @Column(name = "cod_endereco")
   private Long   codEndereco;
   
-  @NotNull
+  
   
   @Column(name = "nome_rua")
   private String nomeRua;
@@ -33,19 +32,19 @@ public class Endereco implements Serializable{
   @Column(name = "cep")
   private String cep;
   
-  @NotNull
+  
   @Column(name = "numero_endereco")
   private String numero;
   
-  @NotNull
+  
   @Column(name = "bairro")
   private String bairro;
     
-  @NotNull
+  
   @Column(name = "cidade")
   private String cidade;
   
-  @NotNull
+  
   @Column(name = "estado")
   private String estado;
   

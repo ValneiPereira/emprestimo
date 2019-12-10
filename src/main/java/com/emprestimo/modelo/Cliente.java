@@ -14,7 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
+
 
 @Entity
 @Table(name = "cliente")
@@ -28,14 +28,14 @@ public class Cliente implements Serializable {
   @Column(name = "cod_cliente")
   private Long              codCliente;
 
-  @NotNull
+  
   @Column(name = "nome_cliente")
   private String            nome;
 
   @Column(name = "sexo")
   private String            sexo;
 
-  @NotNull
+  
   @Column(name = "cpf_cnpj")
   private String            cpf;
 
