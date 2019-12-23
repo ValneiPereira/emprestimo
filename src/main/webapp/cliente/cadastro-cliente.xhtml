@@ -35,8 +35,10 @@
 						<p:inputText id="nome" size="20" maxlength="50" value="#{cadastroClienteMB.cliente.nome}" />
 
 						<p:outputLabel value="CPF:" for="cpf" />
-						<p:inputText id="cpf" size="20" maxlength="10" value="#{cadastroClienteMB.cliente.cpf}" />
-
+						<p:inputMask mask="999.999.999-99" id="cpf" size="20"  value="#{cadastroClienteMB.cliente.cpf}" onkeyup="$(this).val($(this).val().replace(/[^0-9]/g, ''));"/>
+						
+						
+						
 						<p:outputLabel value="Sexo:" for="sexo" />
 						<p:selectOneMenu id="sexo" value="#{cadastroClienteMB.cliente.sexo}">
 							<f:selectItem itemLabel="Selecione o sexo" />
@@ -52,15 +54,14 @@
 							<f:selectItem itemLabel="Especial" itemValue="E" />
 						</p:selectOneMenu>
 						
-						<p:outputLabel value="Total do Patrimonio:" for="totalPatrimonio"   />
-						<p:inputText id="totalPatrimonio" size="20" maxlength="10" value="#{cadastroClienteMB.cliente.totalPatrimonio}" >
-							
-						</p:inputText>
+						<p:outputLabel value="Total do Patrimonio:" />
+						<p:inputNumber required="true" value="#{cadastroClienteMB.cliente.totalPatrimonio}" decimalSeparator="," decimalPlaces="2" thousandSeparator="." symbol="R$ "/>
+
 						
-						<p:outputLabel value="Rendimento mensal:" for="rendimentoMensal" />
-						<p:inputText id="rendimentoMensal" size="20" maxlength="10" value="#{cadastroClienteMB.cliente.rendimentoMensal}" >
-							<p:ajax update="rendimentoMensal" />
-						</p:inputText>
+						<p:outputLabel value="Rendimento mensal:"  />
+						<p:inputNumber required="true" value="#{cadastroClienteMB.cliente.rendimentoMensal}" decimalSeparator="," decimalPlaces="2" thousandSeparator="." symbol="R$ "/> 
+							
+						
 
 						<p:outputLabel value="Riscos:" for="riscos" />
 						<p:inputText id="riscos" size="20" maxlength="10" value="#{cadastroClienteMB.cliente.riscos}" readonly="true" style="text-align: center" />
@@ -85,7 +86,7 @@
 						</p:column>
 
 						<p:column headerText="Número" style="text-align: center; width: 100px">
-							<h:outputText value="#{endereco.numero}" />
+							<h:outputText value="#{endereco.numero}"  />
 						</p:column>
 
 						<p:column headerText="Bairro" style="text-align: center; width: 100px">
