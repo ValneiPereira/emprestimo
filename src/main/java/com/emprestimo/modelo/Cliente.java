@@ -18,6 +18,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "cliente")
+//@NamedQueries(value = {@NamedQuery(name = "ProjetoPreliminarED.consulta", query = "select p from ProjetoPreliminarED p left outer join fetch p.listaRecursosHumanos lr left outer join fetch lr.cargoSalario left outer join fetch p.listaOutrosRecursos where p.idProjPreliminar = :id")})
 public class Cliente implements Serializable {
   //Os objetos seram convertidos para uma sequencia de bytes
   private static final long serialVersionUID = 1L;
