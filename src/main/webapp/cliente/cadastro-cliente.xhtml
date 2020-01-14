@@ -1,15 +1,11 @@
-<ui:composition template="/WEB-INF/template/layout-padrao.xhtml" 
-	xmlns="http://www.w3.org/1999/xhtml" 
-	xmlns:h="http://java.sun.com/jsf/html" 
-	xmlns:f="http://java.sun.com/jsf/core" 
-	xmlns:ui="http://java.sun.com/jsf/facelets" 
-	xmlns:p="http://primefaces.org/ui" 
-	xmlns:o="http://omnifaces.org/ui">
+<ui:composition template="/WEB-INF/template/layout-padrao.xhtml" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui">
 
 	<ui:define name="titulo">Novo Cliente</ui:define>
 	<ui:define name="corpo">
 		<f:metadata>
-			<o:viewParam name="cliente" value="#{cadastroClienteMB.cliente}"/>			
+			<o:viewParam name="cliente" value="#{cadastroClienteMB.cliente}" />
 		</f:metadata>
 
 		<h1>Novo Cliente</h1>
@@ -18,27 +14,27 @@
 			<p:messages id="messages" autoUpdate="true" closable="true" />
 			<p:toolbar style="margin-top: 20px">
 				<p:toolbarGroup>
-					<p:commandButton value="Salvar" id="botaoSalvar" action="#{cadastroClienteMB.salvar}" update="frmCadastro" />
+					<p:commandButton value="Salvar" id="botaoSalvar" action="#{cadastroClienteMB.salvar}"
+						update="frmCadastro" />
 				</p:toolbarGroup>
 				<p:toolbarGroup align="right">
 					<p:button value="Pesquisa" outcome="/cliente/pesquisa-clientes.xhtml" />
 				</p:toolbarGroup>
 			</p:toolbar>
 
-			<p:tabView >
+			<p:tabView>
 				<p:tab title="Dados Pessoas" id="tabDadoPessoas">
-					<p:panelGrid columns="2" id="painel" style="width: 100%; margin-top: 20px;" columnClasses="rotulo, campo">
+					<p:panelGrid columns="2" id="painel" style="width: 100%; margin-top: 20px;"	columnClasses="rotulo, campo">
 						<p:outputLabel value="Código cliente:" for="codigo" />
-						<p:inputText  id="codigo" size="20" maxlength="20" value="#{cadastroClienteMB.cliente.codCliente}" readonly="true" />
+						<p:inputText id="codigo" size="20" maxlength="20" value="#{cadastroClienteMB.cliente.codCliente}" readonly="true" />
 
 						<p:outputLabel value="Nome cliente:" for="nome" />
 						<p:inputText id="nome" size="20" maxlength="50" value="#{cadastroClienteMB.cliente.nome}" />
 
 						<p:outputLabel value="CPF:" for="cpf" />
-						<p:inputMask mask="999.999.999-99" id="cpf" size="20"  value="#{cadastroClienteMB.cliente.cpf}" onkeyup="$(this).val($(this).val().replace(/[^0-9]/g, ''));"/>
-						
-						
-						
+						<p:inputMask mask="999.999.999-99" id="cpf" size="20" value="#{cadastroClienteMB.cliente.cpf}"
+							onkeyup="$(this).val($(this).val().replace(/[^0-9]/g, ''));" />
+
 						<p:outputLabel value="Sexo:" for="sexo" />
 						<p:selectOneMenu id="sexo" value="#{cadastroClienteMB.cliente.sexo}">
 							<f:selectItem itemLabel="Selecione o sexo" />
@@ -47,85 +43,86 @@
 						</p:selectOneMenu>
 
 						<p:outputLabel value="Tipo de cliente:" for="tipoCliente" />
-						<p:selectOneMenu id="tipoCliente" value="#{cadastroClienteMB.cliente.tipoCliente}" >
+						<p:selectOneMenu id="tipoCliente" value="#{cadastroClienteMB.cliente.tipoCliente}">
 							<f:selectItem itemLabel="Selecione o tipo de cliente" />
 							<f:selectItem itemLabel="Potencial" itemValue="P" />
 							<f:selectItem itemLabel="Comum" itemValue="C" />
 							<f:selectItem itemLabel="Especial" itemValue="E" />
 						</p:selectOneMenu>
-						
+
 						<p:outputLabel value="Total do Patrimonio:" />
-						<p:inputNumber required="true" value="#{cadastroClienteMB.cliente.totalPatrimonio}" decimalSeparator="," decimalPlaces="2" thousandSeparator="." symbol="R$ "/>
-
-						
-						<p:outputLabel value="Rendimento mensal:"  />
-						<p:inputNumber required="true" value="#{cadastroClienteMB.cliente.rendimentoMensal}" decimalSeparator="," decimalPlaces="2" thousandSeparator="." symbol="R$ "/> 
+						<p:inputNumber required="true" value="#{cadastroClienteMB.cliente.totalPatrimonio}"
+							decimalSeparator="," decimalPlaces="2" thousandSeparator="." symbol="R$ " />							
 							
-						
-
+						<p:outputLabel value="Rendimento mensal:" />
+						<p:inputNumber required="true" value="#{cadastroClienteMB.cliente.rendimentoMensal}"
+							decimalSeparator="," decimalPlaces="2" thousandSeparator="." symbol="R$ " />
+							
 						<p:outputLabel value="Riscos:" for="riscos" />
-						<p:inputText id="riscos" size="20" maxlength="10" value="#{cadastroClienteMB.cliente.riscos}" readonly="true" style="text-align: center" />
+						<p:inputText id="riscos" size="20" maxlength="10" value="#{cadastroClienteMB.cliente.riscos}"
+							readonly="true" style="text-align: center" />
 					</p:panelGrid>
 					
-								
-										
-					<p:spacer height="30"></p:spacer>
+					<p:spacer height="10"></p:spacer>
 
-					<p:dataTable id="enderecosTable" var="endereco" value="#{cadastroClienteMB.cliente.enderecos}" 
-						style="margin-top:20px" emptyMessage="Nenhum endereco encontrado." rows="20" paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom">
+					<p:toolbar style="border:0px none; background-color:transparent;">
+						<f:facet name="left">
+							<p:commandButton value="Inserir" onclick="PF('endereco').show();" />
+							<p:commandButton value="Remover" process="@this enderecosTable " update="enderecosTable" ajax="true">
+								<p:confirm header="Confirmacao" message="Voce tem certeza" icon="ui-icon-alert" />
+							</p:commandButton>
+							<span class="ui-separator">
+								<span class="ui-icon pi pi-ellipsis-v" />
+							</span>
+						</f:facet>
+					</p:toolbar>
+					<!-- Lista enderecos -->	
+					<p:dataTable id="enderecosTable" var="endereco" value="#{cadastroClienteMB.cliente.enderecos}"
+					 emptyMessage="Nenhum endereco encontrado." rows="20" paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom">
+						 
 						<p:column headerText="Código Endereço" style="text-align: center; width: 100px">
 							<h:outputText value="#{endereco.codEndereco}" />
 						</p:column>
-
 						<p:column headerText="Nome da rua" style="text-align: center; width: 100px">
 							<h:outputText value="#{endereco.nomeRua}" />
 						</p:column>
-
 						<p:column headerText="CEP" style="text-align: center; width: 100px">
 							<h:outputText value="#{endereco.cep}" />
 						</p:column>
-
 						<p:column headerText="Número" style="text-align: center; width: 100px">
-							<h:outputText value="#{endereco.numero}"  />
+							<h:outputText value="#{endereco.numero}" />
 						</p:column>
-
 						<p:column headerText="Bairro" style="text-align: center; width: 100px">
 							<h:outputText value="#{endereco.bairro}" />
 						</p:column>
-
 						<p:column headerText="Cidade" style="text-align: center; width: 100px">
 							<h:outputText value="#{endereco.cidade}" />
 						</p:column>
-
 						<p:column headerText="Estado" style="text-align: center; width: 100px">
 							<h:outputText value="#{endereco.estado}" />
 						</p:column>
-						
-						<p:column style="width: 100px; text-align: center">
-							<p:button  icon="ui-icon-pencil" title="Editar" oncomplete="PF('editarEnderedo').show()" process="@this" update=":frmCadastro:formEditarEndereco">
-														
-							</p:button>
-						</p:column>
-						
-						
 					</p:dataTable>
-					
-					<p:dialog header="Editar e add Endereco:" widgetVar="editarEndereco"  modal="true"	appendTo="@(body)" resizable="false">
-						<h:form id="formEditarEndereco" styleClass="modal-body">
-							<f:validateBean>
-								<div class="div5"></div>
-								<p:spacer height="20" />
-
-								<p:commandButton value="Ok" process="@this,@form" />
-								<p:commandButton value="Cancelar" oncomplete=" PF('editarEnderedo').hide();" />
-								<p:separator />
-								
-							</f:validateBean>
-						</h:form>
-					</p:dialog>
-					
 				</p:tab>
-				</p:tabView>
-			</h:form>
-		</ui:define>
-	</ui:composition>
+			</p:tabView>
+			
+			<!-- Modal enderecos -->
+			<p:dialog widgetVar="endereco" id="modalEnderecoAdicionar" header="Endereços" width="50%" height="60%" modal="true" minWidth="500" minHeight="350" position="top top" resizable="false" closeOnEscape="true" draggable="false" appendTo="@(body)">
+                <h:form id="formAdd" styleClass="modal-body">
+                    <p:panelGrid columns="1" styleClass="Wid100" columnClasses="Wid100" appendTo="@(body)">
+                        <h:panelGroup layout="block" style="margin-bottom: 1em;" class="Responsive TexAlLeft">
+                            <p:commandButton value="Inserir"  ajax="true" process="@this,@form" update="@form :frmCadastro" oncomplete="PF('endereco').hide();" />
+                            <p:commandButton value="Fechar" icon="fa fa-times-circle-o" onclick="PF('endereco').hide();" />
+                        </h:panelGroup>
+                        <p:separator />
+                    </p:panelGrid>
+                </h:form>
+            </p:dialog>	
+            		
+			<!-- Cofirmação global dialog -->
+			<p:confirmDialog id="dlgConfirmaExclusao" widgetVar="dlgConfirmaExclusao" global="true" showEffect="fade" hideEffect="fade" closeOnEscape="true">
+				<p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no padrao-pesquisa-enter;"/>
+				<p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes "/>
+            </p:confirmDialog>
+		</h:form>
+	</ui:define>
+</ui:composition>
