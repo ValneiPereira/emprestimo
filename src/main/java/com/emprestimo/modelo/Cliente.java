@@ -15,10 +15,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-
 @Entity
 @Table(name = "cliente")
-//@NamedQueries(value = {@NamedQuery(name = "ProjetoPreliminarED.consulta", query = "select p from ProjetoPreliminarED p left outer join fetch p.listaRecursosHumanos lr left outer join fetch lr.cargoSalario left outer join fetch p.listaOutrosRecursos where p.idProjPreliminar = :id")})
+//@NamedQueries(value = {@NamedQuery(name = "Cliente.consulta", query = "select c from Cliente c left outer join fetch c.listaEnderecos lr left outer join fetch lr.cargoSalario left outer join fetch p.listaOutrosRecursos where p.idProjPreliminar = :id")})
 public class Cliente implements Serializable {
   //Os objetos seram convertidos para uma sequencia de bytes
   private static final long serialVersionUID = 1L;
@@ -27,39 +26,37 @@ public class Cliente implements Serializable {
   @SequenceGenerator(name = "CLIENTE_SEQ", sequenceName = "cliente_seq", allocationSize = 1)
   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CLIENTE_SEQ")
   @Column(name = "cod_cliente")
-  private Long              codCliente;
+  private Long codCliente;
 
-  
   @Column(name = "nome_cliente")
-  private String            nome;
+  private String nome;
 
   @Column(name = "sexo")
-  private String            sexo;
+  private String sexo;
 
-  
   @Column(name = "cpf_cnpj")
-  private String            cpf;
+  private String cpf;
 
   @Column(name = "tipo_cliente")
-  private String            tipoCliente;
+  private String tipoCliente;
 
   @Column(name = "rendimento_mensal")
-  private BigDecimal        rendimentoMensal;
+  private BigDecimal rendimentoMensal;
 
   @Column(name = "riscos")
-  private String            riscos;
+  private String riscos;
 
   @Column(name = "total_patrimonio")
-  private BigDecimal        totalPatrimonio;
+  private BigDecimal totalPatrimonio;
 
   @Column(name = "atualmente_trabalhando")
-  private boolean           trabalhando;
+  private boolean trabalhando;
 
   @Column(name = "dividas_atuais")
-  private BigDecimal        dividasAtuais;
+  private BigDecimal dividasAtuais;
 
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "cliente")
-  private List<Endereco>    enderecos        = new ArrayList<>();
+  private List<Endereco> listaEnderecos = new ArrayList<>();
 
   public Long getCodCliente() {
     return codCliente;
@@ -117,12 +114,12 @@ public class Cliente implements Serializable {
     this.riscos = riscos;
   }
 
-  public List<Endereco> getEnderecos() {
-    return enderecos;
+  public List<Endereco> getListaEnderecos() {
+    return listaEnderecos;
   }
 
-  public void setEnderecos(List<Endereco> enderecos) {
-    this.enderecos = enderecos;
+  public void setListaEnderecos(List<Endereco> listaEnderecos) {
+    this.listaEnderecos = listaEnderecos;
   }
 
   public boolean isTrabalhando() {
@@ -154,8 +151,8 @@ public class Cliente implements Serializable {
 
   @Override
   public int hashCode() {
-    final int prime = 31;
-    int result = 1;
+    final int prime  = 31;
+    int       result = 1;
     result = prime * result + ((codCliente == null) ? 0 : codCliente.hashCode());
     return result;
   }
