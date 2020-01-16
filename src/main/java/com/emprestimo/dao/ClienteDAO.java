@@ -14,6 +14,7 @@ import com.emprestimo.util.jpa.Transactional;
 public class ClienteDAO implements Serializable {
 	
   private static final long serialVersionUID = 1L;
+  
   @Inject
 	private EntityManager em;
 
