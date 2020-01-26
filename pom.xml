@@ -141,14 +141,6 @@
 			<version>1.1.10.Final</version>
 			<scope>compile</scope>
 		</dependency>
-		
-		<!-- Logs -->
-		<dependency>
-    		<groupId>org.apache.logging.log4j</groupId>
-    		<artifactId>log4j</artifactId>
-    		<version>2.13.0</version>
-    		<type>pom</type>
-		</dependency>
 
 		<!-- OmniFaces (utilitários para JSF) -->
 		<dependency>
