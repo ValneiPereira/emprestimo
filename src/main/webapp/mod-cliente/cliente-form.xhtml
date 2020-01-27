@@ -10,6 +10,7 @@
 	<ui:define name="corpo">
 		<f:metadata>
 			<o:viewParam name="cliente" value="#{cadastroClienteMB.cliente}" />
+			<!-- <f:event type="preRenderView" listener="#{cadastroClienteMB.init}" onPostback="true" /> -->
 		</f:metadata>
 
 		<h1>Novo Cliente</h1>
@@ -28,6 +29,7 @@
 			<p:tabView>
 				<p:tab title="Dados Pessoas" id="tabDadoPessoas">
 					<p:panelGrid columns="2" id="painel" style="width: 100%; margin-top: 20px;" columnClasses="rotulo, campo">
+					
 						<p:outputLabel value="Código cliente:" for="codigo" />
 						<p:inputText id="codigo" size="20" maxlength="20" value="#{cadastroClienteMB.cliente.codCliente}" readonly="true" />
 
@@ -78,9 +80,11 @@
 						</f:facet>
 					</p:toolbar>
 					<!-- Lista enderecos -->
-					<p:dataTable id="enderecosTable" var="endereco" value="#{cadastroClienteMB.cliente.listaEnderecos}"	
-						emptyMessage="Nenhum endereco encontrado." rows="20" paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom">
-
+					<p:dataTable id="enderecosTable" var="endereco" rowKey="#{endereco.hashCode()}" value="#{cadastroClienteMB.cliente.listaEnderecos}" selection="#{cadastroClienteMB.enderecosSelecionado}"	   
+						emptyMessage="Nenhum endereco encontrado." rows="5" paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom"> 
+						
+						<p:column selectionMode="multiple" width="3%" style="text-align:center" />
+	
 						<p:column headerText="Código Endereço" style="text-align: center; width: 100px">
 							<h:outputText value="#{endereco.codEndereco}" />
 						</p:column>
@@ -107,39 +111,36 @@
 			</p:tabView>
 
 			<!-- Modal enderecos -->
-			<p:dialog widgetVar="endereco" id="modalEnderecoAdicionar" header="Endereços" width="45%" height="55%"
-				modal="true" minWidth="270" minHeight="270" position="top top" resizable="false" closeOnEscape="true"
-				draggable="false" appendTo="@(body)">
+			<p:dialog widgetVar="endereco" id="modalEnderecoAdicionar" header="Endereços" width="45%" height="55%" 	modal="true" minWidth="270" minHeight="270" position="top top" resizable="false" closeOnEscape="true" draggable="false" appendTo="@(body)">
 				<h:form id="formAdd" styleClass="modal-body" >
 				
-				<p:toolbar style="border:0px none; background-color:transparent;">
+					<p:toolbar style="border:0px none; background-color:transparent;">
 						<f:facet name="left">
-							<p:commandButton value="Inserir" ajax="true" process="@this,@form"  />
-							<p:commandButton value="Fechar" icon="fa fa-times-circle-o" onclick="PF('endereco').hide();" />
-							
+							<p:commandButton value="Inserir" action="#{cadastroClienteMB.incluirEnderecos()}" ajax="true" process="@this,@form" update="@form :frmCadastro" oncomplete="PF('endereco').hide();" />
+							<p:commandButton value="Fechar"  onclick="PF('endereco').hide();" />
 						</f:facet>
 					</p:toolbar>
 					
 					<p:panelGrid columns="4" style= "border:0px none !important;">
 						<p:outputLabel value="Cep" for="cep" />
-						<p:inputText id="cep" size="20" maxlength="50" value="#{cadastroClienteMB.cliente.nome}" />
+						<p:inputText id="cep" size="20" maxlength="50" value="#{cadastroClienteMB.endereco.cep}" />
 						
-						<p:outputLabel value="Endereço:" for="endereco" />
-						<p:inputText id="endereco" size="20" maxlength="50" value="#{cadastroClienteMB.cliente.nome}" />
+						<p:outputLabel value="Rua:" for="rua" />
+						<p:inputText id="rua" size="20" maxlength="50" value="#{cadastroClienteMB.endereco.nomeRua}" />
 						
 						<p:outputLabel value="Numero:" for="numero" />
-						<p:inputText id="numero" size="20" maxlength="50" value="#{cadastroClienteMB.cliente.nome}" />
+						<p:inputText id="numero" size="20" maxlength="50" value="#{cadastroClienteMB.endereco.numero}" />
 						
-						<p:outputLabel value="Complemento: " for="complemento" />
-						<p:inputText id="complemento" size="20" maxlength="50" value="#{cadastroClienteMB.cliente.nome}" />
-						
-						<p:outputLabel value="Bairro : " for="bairro" />
-						<p:inputText id="bairro" size="20" maxlength="50" value="#{cadastroClienteMB.cliente.nome}" />
+						<p:outputLabel value="Bairro " for="bairro" />
+						<p:inputText id="bairro" size="20" maxlength="50" value="#{cadastroClienteMB.endereco.bairro}" />
 						
 						<p:outputLabel value="Cidade : " for="cidade" />
-						<p:inputText id="cidade" size="20" maxlength="50" value="#{cadastroClienteMB.cliente.nome}" />
+						<p:inputText id="cidade" size="20" maxlength="50" value="#{cadastroClienteMB.endereco.cidade}" />
 						
+						<p:outputLabel value="Estado : " for="estado" />
+						<p:inputText id="estado" size="20" maxlength="50" value="#{cadastroClienteMB.endereco.estado}" />
 					</p:panelGrid>
+					
 				</h:form>
 			</p:dialog>
 

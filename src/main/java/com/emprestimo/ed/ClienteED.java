@@ -3,7 +3,9 @@ package com.emprestimo.ed;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,6 +16,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "cliente")
@@ -56,7 +59,10 @@ public class ClienteED implements Serializable {
   private BigDecimal dividasAtuais;
 
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "cliente")
-  private List<EnderecoED> listaEnderecos = new ArrayList<>();
+  private Set<EnderecoED> listaEnderecos = new LinkedHashSet<EnderecoED>();
+  
+  @Transient
+  private List<EnderecoED> listaEnderecosExclusao = new ArrayList<>();
 
   public Long getCodCliente() {
     return codCliente;
@@ -113,14 +119,24 @@ public class ClienteED implements Serializable {
   public void setRiscos(String riscos) {
     this.riscos = riscos;
   }
-
-  public List<EnderecoED> getListaEnderecos() {
+  
+  public Set<EnderecoED> getListaEnderecos() {
     return listaEnderecos;
   }
 
-  public void setListaEnderecos(List<EnderecoED> listaEnderecos) {
+  public void setListaEnderecos(Set<EnderecoED> listaEnderecos) {
     this.listaEnderecos = listaEnderecos;
   }
+
+  public List<EnderecoED> getListaEnderecosExclusao() {
+    return listaEnderecosExclusao;
+  }
+
+  public void setListaEnderecosExclusao(List<EnderecoED> listaEnderecosExclusao) {
+    this.listaEnderecosExclusao = listaEnderecosExclusao;
+  }
+
+ 
 
   public boolean isTrabalhando() {
     return trabalhando;
@@ -173,5 +189,7 @@ public class ClienteED implements Serializable {
       return false;
     return true;
   }
+
+  
 
 }

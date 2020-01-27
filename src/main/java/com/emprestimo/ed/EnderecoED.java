@@ -109,4 +109,38 @@ public class EnderecoED implements Serializable{
   public void setCliente(ClienteED cliente) {
     this.cliente = cliente;
   }
+
+  @Override
+  public int hashCode() {
+    final int prime  = 31;
+    int       result = 1;
+    result = prime * result + ((cep == null) ? 0 : cep.hashCode());
+    result = prime * result + ((codEndereco == null) ? 0 : codEndereco.hashCode());
+    return result;
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj)
+      return true;
+    if (obj == null)
+      return false;
+    if (getClass() != obj.getClass())
+      return false;
+    EnderecoED other = (EnderecoED) obj;
+    if (cep == null) {
+      if (other.cep != null)
+        return false;
+    } else if (!cep.equals(other.cep))
+      return false;
+    if (codEndereco == null) {
+      if (other.codEndereco != null)
+        return false;
+    } else if (!codEndereco.equals(other.codEndereco))
+      return false;
+    return true;
+  }
+  
+  
+  
 }
