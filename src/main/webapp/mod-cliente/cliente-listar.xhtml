@@ -15,7 +15,7 @@
     		    		
     		<p:toolbar style="margin-top: 20px">
     			<p:toolbarGroup>
-    				<p:commandButton value="Novo" id="botaoNovo" action="cadastro-cliente?faces-redirect=true"/>
+    				<p:commandButton value="Novo" id="botaoNovo" action="cliente-form?faces-redirect=true"/>
     				
 				</p:toolbarGroup>
 			</p:toolbar>
@@ -31,7 +31,7 @@
 				</p:column>
 				
 				<p:column style="width: 100px; text-align: center">
-					<p:button outcome="cadastro-cliente" icon="ui-icon-pencil" title="Editar">
+					<p:button outcome="cliente-form" icon="ui-icon-pencil" title="Editar">
 						<f:param name="cliente" value="#{cliente.codCliente}"/>
 					</p:button>
 					<p:commandButton icon="ui-icon-trash" title="Excluir" oncomplete="PF('confirmacaoExclusao').show()"

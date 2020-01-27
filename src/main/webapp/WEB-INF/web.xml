@@ -7,7 +7,7 @@
 	<display-name>emprestimo</display-name>
 		
 	<welcome-file-list>
-		<welcome-file>/cliente/pesquisa-clientes.xhtml</welcome-file>
+		<welcome-file>/mod-cliente/cliente-listar.xhtml</welcome-file>
 	</welcome-file-list>
 	
 	<context-param>
