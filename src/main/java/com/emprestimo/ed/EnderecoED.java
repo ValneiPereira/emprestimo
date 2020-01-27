@@ -1,4 +1,4 @@
-package com.emprestimo.modelo;
+package com.emprestimo.ed;
 
 import java.io.Serializable;
 
@@ -14,7 +14,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "endereco")
-public class Endereco implements Serializable{
+public class EnderecoED implements Serializable{
 
   private static final long serialVersionUID = 1L;
   
@@ -24,33 +24,27 @@ public class Endereco implements Serializable{
   @Column(name = "cod_endereco")
   private Long   codEndereco;
   
-  
-  
   @Column(name = "nome_rua")
   private String nomeRua;
   
   @Column(name = "cep")
   private String cep;
   
-  
   @Column(name = "numero_endereco")
   private String numero;
   
-  
   @Column(name = "bairro")
   private String bairro;
-    
   
   @Column(name = "cidade")
   private String cidade;
-  
   
   @Column(name = "estado")
   private String estado;
   
   @ManyToOne
   @JoinColumn(name = "cod_cliente")
-  private Cliente        cliente;
+  private ClienteED        cliente;
 
   public Long getCodEndereco() {
     return codEndereco;
@@ -108,11 +102,11 @@ public class Endereco implements Serializable{
     this.estado = estado;
   }
 
-  public Cliente getCliente() {
+  public ClienteED getCliente() {
     return cliente;
   }
 
-  public void setCliente(Cliente cliente) {
+  public void setCliente(ClienteED cliente) {
     this.cliente = cliente;
   }
 }

@@ -5,8 +5,8 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-import com.emprestimo.dao.EnderecoDAO;
-import com.emprestimo.modelo.Endereco;
+import com.emprestimo.ed.EnderecoED;
+import com.emprestimo.endereco.EnderecoBD;
 import com.emprestimo.util.cdi.CDIServiceLocator;
 
 /*
@@ -14,19 +14,19 @@ import com.emprestimo.util.cdi.CDIServiceLocator;
   chamar na mesma tela
 *  
 */
-@FacesConverter(forClass=Endereco.class)
+@FacesConverter(forClass=EnderecoED.class)
 public class EnderecoConverter implements Converter {
 
-	private EnderecoDAO enderecoDAO;
+	private EnderecoBD enderecoDAO;
 	
 	public EnderecoConverter() {
-		this.enderecoDAO = CDIServiceLocator.getBean(EnderecoDAO.class);
+		this.enderecoDAO = CDIServiceLocator.getBean(EnderecoBD.class);
 	}
 
   //recuperar o objeto
 	@Override
 	public Object getAsObject(FacesContext context, UIComponent component, String value) {
-		Endereco retorno = null;
+		EnderecoED retorno = null;
 
 		if (value != null) {
 			retorno = this.enderecoDAO.buscarPeloCodigo(new Long(value));
@@ -38,7 +38,7 @@ public class EnderecoConverter implements Converter {
 	@Override
 	public String getAsString(FacesContext context, UIComponent component, Object value) {
 		if (value != null) {
-			Long codigo = ((Endereco) value).getCodEndereco();
+			Long codigo = ((EnderecoED) value).getCodEndereco();
 			String retorno = (codigo == null ? null : codigo.toString());
 			
 			return retorno;

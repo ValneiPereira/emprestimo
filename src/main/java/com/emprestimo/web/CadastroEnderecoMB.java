@@ -7,8 +7,8 @@ import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import com.emprestimo.modelo.Endereco;
-import com.emprestimo.service.CadastroEnderecoService;
+import com.emprestimo.ed.EnderecoED;
+import com.emprestimo.endereco.EnderecoRN;
 import com.emprestimo.service.NegocioException;
 import com.emprestimo.util.jsf.FacesUtil;
 
@@ -19,9 +19,9 @@ public class CadastroEnderecoMB implements Serializable {
   private static final long serialVersionUID = 1L;
 
   @Inject
-  private CadastroEnderecoService cadastroEnderecoService;
+  private EnderecoRN cadastroEnderecoService;
 
-  private Endereco endereco;
+  private EnderecoED endereco;
 
   @PostConstruct
   public void init() {
@@ -42,14 +42,14 @@ public class CadastroEnderecoMB implements Serializable {
   }
 
   public void limpar() {
-    this.endereco = new Endereco();
+    this.endereco = new EnderecoED();
   }
 
-  public  Endereco getEndereco() {
+  public  EnderecoED getEndereco() {
     return endereco;
   }
 
-  public void setEndereco(Endereco cliente) {
+  public void setEndereco(EnderecoED cliente) {
     this.endereco = cliente;
   }
 

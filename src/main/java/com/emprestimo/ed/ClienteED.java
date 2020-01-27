@@ -1,4 +1,4 @@
-package com.emprestimo.modelo;
+package com.emprestimo.ed;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -18,7 +18,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "cliente")
 //@NamedQueries(value = {@NamedQuery(name = "Cliente.consulta", query = "select c from Cliente c left outer join fetch c.listaEnderecos lr left outer join fetch lr.cargoSalario left outer join fetch p.listaOutrosRecursos where p.idProjPreliminar = :id")})
-public class Cliente implements Serializable {
+public class ClienteED implements Serializable {
   //Os objetos seram convertidos para uma sequencia de bytes
   private static final long serialVersionUID = 1L;
 
@@ -56,7 +56,7 @@ public class Cliente implements Serializable {
   private BigDecimal dividasAtuais;
 
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "cliente")
-  private List<Endereco> listaEnderecos = new ArrayList<>();
+  private List<EnderecoED> listaEnderecos = new ArrayList<>();
 
   public Long getCodCliente() {
     return codCliente;
@@ -114,11 +114,11 @@ public class Cliente implements Serializable {
     this.riscos = riscos;
   }
 
-  public List<Endereco> getListaEnderecos() {
+  public List<EnderecoED> getListaEnderecos() {
     return listaEnderecos;
   }
 
-  public void setListaEnderecos(List<Endereco> listaEnderecos) {
+  public void setListaEnderecos(List<EnderecoED> listaEnderecos) {
     this.listaEnderecos = listaEnderecos;
   }
 
@@ -165,7 +165,7 @@ public class Cliente implements Serializable {
       return false;
     if (getClass() != obj.getClass())
       return false;
-    Cliente other = (Cliente) obj;
+    ClienteED other = (ClienteED) obj;
     if (codCliente == null) {
       if (other.codCliente != null)
         return false;

@@ -5,8 +5,8 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-import com.emprestimo.dao.ClienteDAO;
-import com.emprestimo.modelo.Cliente;
+import com.emprestimo.cliente.ClienteBD;
+import com.emprestimo.ed.ClienteED;
 import com.emprestimo.util.cdi.CDIServiceLocator;
 
 /*
@@ -14,19 +14,19 @@ import com.emprestimo.util.cdi.CDIServiceLocator;
   chamar na mesma tela
 *  
 */
-@FacesConverter(forClass=Cliente.class)
+@FacesConverter(forClass=ClienteED.class)
 public class ClienteConverter implements Converter {
 
-	private ClienteDAO clienteDAO;
+	private ClienteBD clienteDAO;
 	
 	public ClienteConverter() {
-		this.clienteDAO = CDIServiceLocator.getBean(ClienteDAO.class);
+		this.clienteDAO = CDIServiceLocator.getBean(ClienteBD.class);
 	}
 
   //recuperar o objeto
 	@Override
 	public Object getAsObject(FacesContext context, UIComponent component, String value) {
-		Cliente retorno = null;
+		ClienteED retorno = null;
 
 		if (value != null) {
 			retorno = this.clienteDAO.buscarPeloCodigo(new Long(value));
@@ -38,7 +38,7 @@ public class ClienteConverter implements Converter {
 	@Override
 	public String getAsString(FacesContext context, UIComponent component, Object value) {
 		if (value != null) {
-			Long codigo = ((Cliente) value).getCodCliente();
+			Long codigo = ((ClienteED) value).getCodCliente();
 			String retorno = (codigo == null ? null : codigo.toString());
 			
 			return retorno;

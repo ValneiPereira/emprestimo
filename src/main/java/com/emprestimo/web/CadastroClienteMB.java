@@ -7,8 +7,8 @@ import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import com.emprestimo.modelo.Cliente;
-import com.emprestimo.service.CadastroClienteService;
+import com.emprestimo.cliente.ClienteRN;
+import com.emprestimo.ed.ClienteED;
 import com.emprestimo.service.NegocioException;
 import com.emprestimo.util.jsf.FacesUtil;
 
@@ -19,9 +19,9 @@ public class CadastroClienteMB implements Serializable {
   private static final long serialVersionUID = 1L;
 
   @Inject
-  private CadastroClienteService cadastroClienteService;
+  private ClienteRN cadastroClienteService;
 
-  private Cliente cliente;
+  private ClienteED cliente;
   
   private boolean clienteEspecial;
 
@@ -46,14 +46,14 @@ public class CadastroClienteMB implements Serializable {
   }
 
   public void limpar() {
-    this.cliente = new Cliente();
+    this.cliente = new ClienteED();
   }
 
-  public Cliente getCliente() {
+  public ClienteED getCliente() {
     return cliente;
   }
 
-  public void setCliente(Cliente cliente) {
+  public void setCliente(ClienteED cliente) {
     this.cliente = cliente;
   }
   

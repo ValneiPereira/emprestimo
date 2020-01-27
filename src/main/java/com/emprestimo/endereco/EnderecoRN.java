@@ -1,23 +1,23 @@
-package com.emprestimo.service;
+package com.emprestimo.endereco;
 
 import java.io.Serializable;
 
 import javax.inject.Inject;
 
-import com.emprestimo.dao.EnderecoDAO;
-import com.emprestimo.modelo.Endereco;
+import com.emprestimo.ed.EnderecoED;
+import com.emprestimo.service.NegocioException;
 import com.emprestimo.util.jpa.Transactional;
 
 
-public class CadastroEnderecoService implements Serializable {
+public class EnderecoRN implements Serializable {
 
   private static final long serialVersionUID = 1L;
   
   @Inject
-	private EnderecoDAO enderecoDAO;
+	private EnderecoBD enderecoDAO;
 
 	@Transactional
-	public void salvar(Endereco endereco) throws NegocioException {
+	public void salvar(EnderecoED endereco) throws NegocioException {
 		if (endereco.getNomeRua() == null || endereco.getNomeRua().trim().equals("")) {
 			throw new NegocioException("O endereço é obrigatório");
 		}

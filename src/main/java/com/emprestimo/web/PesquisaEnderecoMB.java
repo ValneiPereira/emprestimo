@@ -9,8 +9,8 @@ import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import com.emprestimo.dao.EnderecoDAO;
-import com.emprestimo.modelo.Endereco;
+import com.emprestimo.ed.EnderecoED;
+import com.emprestimo.endereco.EnderecoBD;
 import com.emprestimo.service.NegocioException;
 import com.emprestimo.util.jsf.FacesUtil;
 
@@ -21,13 +21,13 @@ public class PesquisaEnderecoMB implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Inject
-	EnderecoDAO enderecoDAO;
+	EnderecoBD enderecoDAO;
 
-	private List<Endereco> enderecos = new ArrayList<>();
+	private List<EnderecoED> enderecos = new ArrayList<>();
 
-	private Endereco enderecoSelecionado;
+	private EnderecoED enderecoSelecionado;
 
-	public List<Endereco> getclientes() {
+	public List<EnderecoED> getclientes() {
 		return enderecos;
 	}
 
@@ -41,11 +41,11 @@ public class PesquisaEnderecoMB implements Serializable {
 		}
 	}
 
-	public Endereco getEnderecoSelecionado() {
+	public EnderecoED getEnderecoSelecionado() {
 		return enderecoSelecionado;
 	}
 
-	public void setEnderecoSelecionado(Endereco enderecoSelecionado) {
+	public void setEnderecoSelecionado(EnderecoED enderecoSelecionado) {
 		this.enderecoSelecionado = enderecoSelecionado;
 	}
 

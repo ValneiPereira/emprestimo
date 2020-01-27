@@ -9,8 +9,8 @@ import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import com.emprestimo.dao.ClienteDAO;
-import com.emprestimo.modelo.Cliente;
+import com.emprestimo.cliente.ClienteBD;
+import com.emprestimo.ed.ClienteED;
 import com.emprestimo.service.NegocioException;
 import com.emprestimo.util.jsf.FacesUtil;
 
@@ -21,13 +21,13 @@ public class PesquisaClienteMB implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Inject
-	ClienteDAO clienteDAO;
+	ClienteBD clienteDAO;
 
-	private List<Cliente> clientes = new ArrayList<>();
+	private List<ClienteED> clientes = new ArrayList<>();
 
-	private Cliente clienteSelecionado;
+	private ClienteED clienteSelecionado;
 
-	public List<Cliente> getclientes() {
+	public List<ClienteED> getclientes() {
 		return clientes;
 	}
 
@@ -41,11 +41,11 @@ public class PesquisaClienteMB implements Serializable {
 		}
 	}
 
-	public Cliente getClienteSelecionado() {
+	public ClienteED getClienteSelecionado() {
 		return clienteSelecionado;
 	}
 
-	public void setClienteSelecionado(Cliente clienteSelecionado) {
+	public void setClienteSelecionado(ClienteED clienteSelecionado) {
 		this.clienteSelecionado = clienteSelecionado;
 	}
 

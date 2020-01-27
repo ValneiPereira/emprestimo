@@ -1,40 +1,35 @@
-package com.emprestimo.service;
+package com.emprestimo.cliente;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
 
 import javax.inject.Inject;
 
-import com.emprestimo.dao.ClienteDAO;
-import com.emprestimo.modelo.Cliente;
+import com.emprestimo.ed.ClienteED;
+import com.emprestimo.service.NegocioException;
 import com.emprestimo.util.jpa.Transactional;
 
 
-public class CadastroClienteService implements Serializable {
+public class ClienteRN implements Serializable {
 
   private static final long serialVersionUID = 1L;
   
   @Inject
-	private ClienteDAO clienteDAO;
+	private ClienteBD clienteDAO;
 
 	@Transactional
-	public void salvar(Cliente cliente) throws NegocioException {
+	public void salvar(ClienteED cliente) throws NegocioException {
 		if (cliente.getNome() == null || cliente.getNome().trim().equals("")) {
 			throw new NegocioException("O nome do cliente é obrigatório");
 		}
-		if (cliente.getCpf() == null || cliente.getCpf().trim().equals("")) {
-      throw new NegocioException("O CPF do cliente é obrigatório");
-    }
-		if (cliente.getSexo() == null || cliente.getSexo().trim().equals("")) {
-      throw new NegocioException("O Sexo do cliente é obrigatório");
-    }
+		
 		if (cliente.getTipoCliente() == null || cliente.getTipoCliente().trim().equals("")) {
       throw new NegocioException("Tipo do cliente é obrigatório");
     }
 		this.clienteDAO.salvar(cliente);
 	}
 	
-	public void verificarRiscos(Cliente cliente) {
+	public void verificarRiscos(ClienteED cliente) {
 	  
 	  if(cliente.getRendimentoMensal().compareTo(new BigDecimal(2000))== -1){
 	   cliente.setRiscos("C");  
@@ -47,7 +42,7 @@ public class CadastroClienteService implements Serializable {
 	   this.clienteDAO.salvar(cliente);
 
 	}
-	public void verificarTipoCliente(Cliente cliente) {
+	public void verificarTipoCliente(ClienteED cliente) {
 	  
 	  if(cliente.getTipoCliente().equals("E")) {
 	    cliente.setTotalPatrimonio(cliente.getTotalPatrimonio());
