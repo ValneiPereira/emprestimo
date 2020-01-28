@@ -36,15 +36,14 @@ public class ClienteConverter implements Converter {
 	}
 
 	@Override
-	public String getAsString(FacesContext context, UIComponent component, Object value) {
-		if (value != null) {
-			Long codigo = ((ClienteED) value).getCodCliente();
-			String retorno = (codigo == null ? null : codigo.toString());
-			
-			return retorno;
-		}
-		
-		return "";
-	}
-
+  public String getAsString(FacesContext context, UIComponent component, Object value) {
+    if (value != null) {
+      Long codigo = ((ClienteED) value).getCodCliente();
+      String retorno = (codigo == null ? null : codigo.toString());
+      
+      return retorno;
+    }
+    
+    return "";
+  }
 }

@@ -86,7 +86,7 @@ public class CadastroClienteMB implements Serializable {
       this.cadastroClienteService.salvar(cliente);
       FacesUtil.addSuccessMessage("Cliente salvo com sucesso!");
 
-      this.limpar();
+      //this.limpar();
     } catch (NegocioException e) {
       FacesUtil.addErrorMessage(e.getMessage());
     }

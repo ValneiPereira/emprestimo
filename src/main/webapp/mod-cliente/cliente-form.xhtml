@@ -31,7 +31,7 @@
 					<p:panelGrid columns="2" id="painel" style="width: 100%; margin-top: 20px;" columnClasses="rotulo, campo">
 					
 						<p:outputLabel value="Código cliente:" for="codigo" />
-						<p:inputText id="codigo" size="20" maxlength="20" value="#{cadastroClienteMB.cliente.codCliente}" readonly="true" />
+						<p:inputText id="codigo" size="20" maxlength="20" value="#{cadastroClienteMB.cliente.codCliente}" readonly="true"  />
 
 						<p:outputLabel value="Nome cliente:" for="nome" />
 						<p:inputText id="nome" size="20" maxlength="50" value="#{cadastroClienteMB.cliente.nome}" />
@@ -109,14 +109,21 @@
 					</p:dataTable>
 				</p:tab>
 			</p:tabView>
-
-			<!-- Modal enderecos -->
+			<!-- Cofirmação global dialog -->
+			<p:confirmDialog id="dlgConfirmaExclusao" widgetVar="dlgConfirmaExclusao" global="true" showEffect="fade" hideEffect="fade" closeOnEscape="true">
+				<p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no padrao-pesquisa-enter;" />
+				<p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes " />
+			</p:confirmDialog>
+		</h:form>
+		
+		
+		<!-- Modal enderecos -->
 			<p:dialog widgetVar="endereco" id="modalEnderecoAdicionar" header="Endereços" width="45%" height="55%" 	modal="true" minWidth="270" minHeight="270" position="top top" resizable="false" closeOnEscape="true" draggable="false" appendTo="@(body)">
 				<h:form id="formAdd" styleClass="modal-body" >
 				
 					<p:toolbar style="border:0px none; background-color:transparent;">
 						<f:facet name="left">
-							<p:commandButton value="Inserir" action="#{cadastroClienteMB.incluirEnderecos()}" ajax="true" process="@this,@form" update="@form :frmCadastro" oncomplete="PF('endereco').hide();" />
+							<p:commandButton value="Inserir" action="#{cadastroClienteMB.incluirEnderecos()}" ajax="true" process="@this,@form"  update="@form :frmCadastro " oncomplete="PF('endereco').hide();" />
 							<p:commandButton value="Fechar"  onclick="PF('endereco').hide();" />
 						</f:facet>
 					</p:toolbar>
@@ -143,12 +150,9 @@
 					
 				</h:form>
 			</p:dialog>
-
-			<!-- Cofirmação global dialog -->
-			<p:confirmDialog id="dlgConfirmaExclusao" widgetVar="dlgConfirmaExclusao" global="true" showEffect="fade" hideEffect="fade" closeOnEscape="true">
-				<p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no padrao-pesquisa-enter;" />
-				<p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes " />
-			</p:confirmDialog>
-		</h:form>
+		
+		
+		
+		
 	</ui:define>
 </ui:composition>
